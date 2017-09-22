@@ -64,9 +64,10 @@ module Razor
         raise InvalidConfigurationError,
           _("The configuration file %{filename} does not exist") % {filename: fname} if @values.empty?
       rescue Errno::EACCES
-        raise InvalidConfigurationError,
-          _("The configuration file %{filename} is not readable") % {filename: fname}
+        # The given file is not readable. This is okay.
       end
+
+      @values
     end
 
     def flat_values
